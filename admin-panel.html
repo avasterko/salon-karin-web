@@ -88,6 +88,55 @@
         <div class="card">
 
             <h2>Rezervácie</h2>
+            <div style="
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+">
+
+    <div style="
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    ">
+        📅 Dnes
+        <br>
+        <strong id="pocetDnes">0</strong>
+    </div>
+
+
+    <div style="
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    ">
+        📅 Zajtra
+        <br>
+        <strong id="pocetZajtra">0</strong>
+    </div>
+
+
+    <div style="
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    ">
+        📋 Všetky
+        <br>
+        <strong id="pocetVsetky">0</strong>
+    </div>
+
+</div>
 <div style="
     display: flex;
     gap: 10px;
@@ -225,7 +274,51 @@ if (!data || data.length === 0) {
     return;
 }
 
+const dnesDatum =
+    new Date()
+        .toISOString()
+        .split("T")[0];
 
+
+const zajtraDatum =
+    new Date();
+
+
+zajtraDatum.setDate(
+    zajtraDatum.getDate() + 1
+);
+
+
+const zajtraDatumString =
+    zajtraDatum
+        .toISOString()
+        .split("T")[0];
+
+
+const pocetDnes =
+    data.filter(
+        rezervacia =>
+            rezervacia.reservation_date === dnesDatum
+    ).length;
+
+
+const pocetZajtra =
+    data.filter(
+        rezervacia =>
+            rezervacia.reservation_date === zajtraDatumString
+    ).length;
+
+
+document.getElementById("pocetDnes").innerText =
+    pocetDnes;
+
+
+document.getElementById("pocetZajtra").innerText =
+    pocetZajtra;
+
+
+document.getElementById("pocetVsetky").innerText =
+    data.length;
 let zobrazeneRezervacie = data;
 
 

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin – Salón Karin</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f3f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #chyba {
+            color: #c00;
+            margin-top: 15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h1>🔐 Admin Salón Karin</h1>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="heslo"
+            placeholder="Heslo"
+        >
+
+        <button onclick="prihlasit()">
+            Prihlásiť sa
+        </button>
+
+        <div id="chyba"></div>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+
+        const SUPABASE_URL =
+            "SEM_DAJ_TVOJU_SUPABASE_URL";
+
+        const SUPABASE_KEY =
+            "SEM_DAJ_TVOJ_SUPABASE_KEY";
+
+
+        const supabaseClient =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        async function prihlasit() {
+
+            const email =
+                document.getElementById("email")
+                    .value
+                    .trim();
+
+            const heslo =
+                document.getElementById("heslo")
+                    .value;
+
+
+            if (!email || !heslo) {
+
+                document.getElementById("chyba").innerText =
+                    "Vyplň email a heslo.";
+
+                return;
+            }
+
+
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: heslo
+
+                });
+
+
+            if (error) {
+
+                document.getElementById("chyba").innerText =
+                    "Nesprávny email alebo heslo.";
+
+                console.error(error);
+
+                return;
+            }
+
+
+            window.location.href =
+                "admin-panel.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+const SUPABASE_URL =
+        "https://jypedwqbgsdfjadldyxi.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_3Stz2S3Dc0QXKbIKdEJrzA_5t2fFg-O";

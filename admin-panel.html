@@ -233,7 +233,48 @@ document.getElementById("obsah").innerHTML =
     `).join(""); }
 
 
-        async function odhlasit() {
+        async function zrusitRezervaciu(id) {
+
+    const potvrdenie =
+        confirm(
+            "Naozaj chceš zrušiť túto rezerváciu?"
+        );
+
+    if (!potvrdenie) {
+        return;
+    }
+
+
+    const { error } =
+        await supabaseClient
+            .from("reservations")
+            .delete()
+            .eq("id", id);
+
+
+    if (error) {
+
+        console.error(
+            "SUPABASE ERROR:",
+            error
+        );
+
+        alert(
+            "Rezerváciu sa nepodarilo zrušiť."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "Rezervácia bola zrušená."
+    );
+
+
+    skontrolujPrihlasenie();
+
+}async function odhlasit() {
 
             await supabaseClient.auth.signOut();
 

@@ -212,7 +212,22 @@ document.getElementById("obsah").innerHTML =
             <br>
 
             📧 ${rezervacia.email}
+<br>
 
+<button
+    onclick="zrusitRezervaciu('${rezervacia.id}')"
+    style="
+        margin-top: 10px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        background: #c62828;
+        color: white;
+        cursor: pointer;
+    "
+>
+    ❌ Zrušiť rezerváciu
+</button>
         </div>
 
     `).join(""); }

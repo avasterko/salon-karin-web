@@ -156,7 +156,31 @@
         min-width: 120px;
         text-align: center;
     ">
-        📋 Všetky
+        <button
+    onclick="nastavKadernicku('Martina')"
+    style="
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    "
+>
+    👩 Martina
+</button>
+
+
+<button
+    onclick="nastavKadernicku('Karin')"
+    style="
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    "
+>
+    👩 Karin
+</button>
+📋 Všetky
         <br>
         <strong id="pocetVsetky">0</strong>
     </div>
@@ -239,7 +263,16 @@
             );
 
 let aktualnyFilter = "vsetky";
+let aktualnaKadernicka = "vsetky";
 
+
+function nastavKadernicku(kadernicka) {
+
+    aktualnaKadernicka = kadernicka;
+
+    skontrolujPrihlasenie();
+
+}
 
 function nastavFilter(filter) {
 
@@ -344,7 +377,15 @@ document.getElementById("pocetZajtra").innerText =
 
 document.getElementById("pocetVsetky").innerText =
     data.length;
-let zobrazeneRezervacie = data;
+let zobrazeneRezervacie = data; if (aktualnaKadernicka !== "vsetky") {
+
+    zobrazeneRezervacie =
+        zobrazeneRezervacie.filter(
+            rezervacia =>
+                rezervacia.kadernicka === aktualnaKadernicka
+        );
+
+}
 
 
 if (aktualnyFilter === "dnes") {

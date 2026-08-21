@@ -142,10 +142,79 @@
             }
 
 
-            document.getElementById("obsah").innerText =
-                "Prihlásenie úspešné. Rezervácie pridáme v ďalšom kroku.";
+       const { data, error } =
+    await supabaseClient
+        .from("reservations")
+        .select("*")
+        .order("reservation_date", {
+            ascending: true
+        })
+        .order("reservation_time", {
+            ascending: true
+        });
 
-        }
+if (error) {
+
+    console.error("SUPABASE ERROR:", error);
+
+    document.getElementById("obsah").innerText =
+        "Nepodarilo sa načítať rezervácie.";
+
+    return;
+}
+
+
+if (!data || data.length === 0) {
+
+    document.getElementById("obsah").innerText =
+        "Zatiaľ nemáš žiadne rezervácie.";
+
+    return;
+}
+
+
+document.getElementById("obsah").innerHTML =
+
+    data.map(rezervacia => `
+
+        <div style="
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        ">
+
+            <strong>
+                ${rezervacia.name}
+            </strong>
+
+            <br>
+
+            📅 ${rezervacia.reservation_date}
+
+            <br>
+
+            🕐 ${rezervacia.reservation_time}
+
+            <br>
+
+            ✂️ ${rezervacia.service}
+
+            <br>
+
+            👩 ${rezervacia.kadernicka}
+
+            <br>
+
+            📞 ${rezervacia.phone}
+
+            <br>
+
+            📧 ${rezervacia.email}
+
+        </div>
+
+    `).join(""); }
 
 
         async function odhlasit() {

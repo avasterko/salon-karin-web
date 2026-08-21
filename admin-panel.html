@@ -156,30 +156,7 @@
         min-width: 120px;
         text-align: center;
     ">
-        <button
-    onclick="nastavKadernicku('Martina')"
-    style="
-        padding: 10px 15px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    "
->
-    👩 Martina
-</button>
-
-
-<button
-    onclick="nastavKadernicku('Karin')"
-    style="
-        padding: 10px 15px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    "
->
-    👩 Karin
-</button>
+        
 📋 Všetky
         <br>
         <strong id="pocetVsetky">0</strong>
@@ -231,6 +208,59 @@
 
 </div>
             <div
+
+            <div style="
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+">
+
+    <strong style="
+        width: 100%;
+        margin-bottom: 5px;
+    ">
+        👩 Kaderníčka:
+    </strong>
+
+    <button
+        onclick="nastavKadernicku('vsetky')"
+        style="
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        "
+    >
+        👩 Všetky
+    </button>
+
+    <button
+        onclick="nastavKadernicku('Martina')"
+        style="
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        "
+    >
+        👩 Martina
+    </button>
+
+    <button
+        onclick="nastavKadernicku('Karin')"
+        style="
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        "
+    >
+        👩 Karin
+    </button>
+
+</div>
+
                 class="loading"
                 id="obsah"
             >
@@ -377,16 +407,7 @@ document.getElementById("pocetZajtra").innerText =
 
 document.getElementById("pocetVsetky").innerText =
     data.length;
-if (aktualnaKadernicka !== "vsetky") {
-
-    zobrazeneRezervacie =
-        zobrazeneRezervacie.filter(
-            rezervacia =>
-                rezervacia.kadernicka === aktualnaKadernicka
-        );
-
-}
-let zobrazeneRezervacie = data; 
+let zobrazeneRezervacie = data;
 
 
 if (aktualnyFilter === "dnes") {

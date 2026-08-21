@@ -88,7 +88,50 @@
         <div class="card">
 
             <h2>Rezervácie</h2>
+<div style="
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+">
 
+    <button
+        onclick="nastavFilter('dnes')"
+        style="
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        "
+    >
+        📅 Dnes
+    </button>
+
+    <button
+        onclick="nastavFilter('zajtra')"
+        style="
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        "
+    >
+        📅 Zajtra
+    </button>
+
+    <button
+        onclick="nastavFilter('vsetky')"
+        style="
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        "
+    >
+        📋 Všetky
+    </button>
+
+</div>
             <div
                 class="loading"
                 id="obsah"
@@ -121,7 +164,16 @@
                 SUPABASE_KEY
             );
 
+let aktualnyFilter = "vsetky";
 
+
+function nastavFilter(filter) {
+
+    aktualnyFilter = filter;
+
+    skontrolujPrihlasenie();
+
+}
         async function skontrolujPrihlasenie() {
 
             const {
@@ -174,9 +226,48 @@ if (!data || data.length === 0) {
 }
 
 
-document.getElementById("obsah").innerHTML =
+let zobrazeneRezervacie = data;
 
-    data.map(rezervacia => `
+
+if (aktualnyFilter === "dnes") {
+
+    const dnes =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+    zobrazeneRezervacie =
+        data.filter(
+            rezervacia =>
+                rezervacia.reservation_date === dnes
+        );
+
+}
+
+
+if (aktualnyFilter === "zajtra") {
+
+    const zajtra =
+        new Date();
+
+    zajtra.setDate(
+        zajtra.getDate() + 1
+    );
+
+    const datumZajtra =
+        zajtra
+            .toISOString()
+            .split("T")[0];
+
+    zobrazeneRezervacie =
+        data.filter(
+            rezervacia =>
+                rezervacia.reservation_date === datumZajtra
+        );
+
+} document.getElementById("obsah").innerHTML =
+
+   zobrazeneRezervacie.map(rezervacia => `
 
         <div style="
             padding: 15px;

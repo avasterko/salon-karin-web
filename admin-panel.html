@@ -152,7 +152,8 @@
         .order("reservation_time", {
             ascending: true
         });
-
+console.log("REZERVACIE:", data);
+console.log("CHYBA:", error);
 if (error) {
 
     console.error("SUPABASE ERROR:", error);

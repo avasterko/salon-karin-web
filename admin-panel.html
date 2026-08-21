@@ -377,7 +377,7 @@ document.getElementById("pocetZajtra").innerText =
 
 document.getElementById("pocetVsetky").innerText =
     data.length;
-let zobrazeneRezervacie = data; if (aktualnaKadernicka !== "vsetky") {
+if (aktualnaKadernicka !== "vsetky") {
 
     zobrazeneRezervacie =
         zobrazeneRezervacie.filter(
@@ -386,6 +386,7 @@ let zobrazeneRezervacie = data; if (aktualnaKadernicka !== "vsetky") {
         );
 
 }
+let zobrazeneRezervacie = data; 
 
 
 if (aktualnyFilter === "dnes") {

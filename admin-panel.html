@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin panel – Salón Karin</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f3f0;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .logout {
+            background: #222;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        main {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>🌸 Salón Karin – Admin</h1>
+
+        <button
+            class="logout"
+            onclick="odhlasit()"
+        >
+            Odhlásiť sa
+        </button>
+
+    </header>
+
+
+    <main>
+
+        <div class="card">
+
+            <h2>Rezervácie</h2>
+
+            <div
+                class="loading"
+                id="obsah"
+            >
+                Načítavam rezervácie...
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://jypedwqbgsdfjadldyxi.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_3Stz2S3Dc0QXKbIKdEJrzA_5t2fFg-O";
+
+
+        const supabaseClient =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        async function skontrolujPrihlasenie() {
+
+            const {
+                data: {
+                    session
+                }
+            } =
+                await supabaseClient.auth.getSession();
+
+
+            if (!session) {
+
+                window.location.href =
+                    "admin.html";
+
+                return;
+
+            }
+
+
+            document.getElementById("obsah").innerText =
+                "Prihlásenie úspešné. Rezervácie pridáme v ďalšom kroku.";
+
+        }
+
+
+        async function odhlasit() {
+
+            await supabaseClient.auth.signOut();
+
+            window.location.href =
+                "admin.html";
+
+        }
+
+
+        skontrolujPrihlasenie();
+
+    </script>
+
+</body>
+
+</html>

@@ -163,6 +163,7 @@
     </div>
 
 </div>
+
 <div style="
     display: flex;
     gap: 10px;
@@ -170,97 +171,49 @@
     margin-bottom: 20px;
 ">
 
-    <button
-        onclick="nastavFilter('dnes')"
-        style="
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        "
-    >
+    <strong style="width: 100%;">
+        📅 Dátum:
+    </strong>
+
+    <button onclick="nastavFilter('dnes')">
         📅 Dnes
     </button>
 
-    <button
-        onclick="nastavFilter('zajtra')"
-        style="
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        "
-    >
+    <button onclick="nastavFilter('zajtra')">
         📅 Zajtra
     </button>
 
-    <button
-        onclick="nastavFilter('vsetky')"
-        style="
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        "
-    >
+    <button onclick="nastavFilter('vsetky')">
         📋 Všetky
     </button>
 
 </div>
-            <div
 
-            <div style="
+
+<div style="
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 ">
 
-    <strong style="
-        width: 100%;
-        margin-bottom: 5px;
-    ">
+    <strong style="width: 100%;">
         👩 Kaderníčka:
     </strong>
 
-    <button
-        onclick="nastavKadernicku('vsetky')"
-        style="
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        "
-    >
+    <button onclick="nastavKadernicku('vsetky')">
         👩 Všetky
     </button>
 
-    <button
-        onclick="nastavKadernicku('Martina')"
-        style="
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        "
-    >
+    <button onclick="nastavKadernicku('Martina')">
         👩 Martina
     </button>
 
-    <button
-        onclick="nastavKadernicku('Karin')"
-        style="
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        "
-    >
+    <button onclick="nastavKadernicku('Karin')">
         👩 Karin
     </button>
 
 </div>
-
                 class="loading"
                 id="obsah"
             >

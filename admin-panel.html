@@ -363,6 +363,15 @@ document.getElementById("pocetVsetky").innerText =
     data.length;
 let zobrazeneRezervacie = data;
 
+if (aktualnaKadernicka !== "vsetky") {
+
+    zobrazeneRezervacie =
+        zobrazeneRezervacie.filter(
+            rezervacia =>
+                rezervacia.kadernicka === aktualnaKadernicka
+        );
+
+}
 
 if (aktualnyFilter === "dnes") {
 
